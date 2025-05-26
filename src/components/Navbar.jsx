@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import logo from "../assets/images/logo.png";
 import { FiSearch, FiUser, FiShoppingCart } from "react-icons/fi";
 import { MdMenu, MdClose } from "react-icons/md";
-import { RiArrowDropDownLine } from "react-icons/ri";
+import { GoSidebarCollapse } from "react-icons/go";
 
 const Navbar = () => {
   const [visible, setVisible] = useState(false);
@@ -109,7 +109,7 @@ const Navbar = () => {
             onClick={() => setVisible(false)}
             className="flex items-center gap-4 p-3 cursor-pointer hover:bg-gray-200"
           >
-            <RiArrowDropDownLine className="text-2xl" />
+            <GoSidebarCollapse className="text-2xl" />
             <p>Back</p>
           </div>
 
