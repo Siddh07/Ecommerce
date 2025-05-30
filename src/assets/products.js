@@ -7,12 +7,15 @@ const products = [
     image: product1,  // renamed from 'src' to 'image' for consistency
     name: "Red T-shirt",  // renamed from 'alt' to 'name'
     price: 19.99,
+    bestseller: true,
   },
   {
     id: 2,
     image: product2,
     name: "Blue Jeans",
     price: 49.99,
+    bestseller: false,
+
   },
 ];
 

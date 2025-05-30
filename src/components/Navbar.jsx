@@ -11,8 +11,12 @@ const Navbar = () => {
 
   return (
     <nav className="flex items-center justify-between py-5 font-medium relative px-4 sm:px-8">
-      {/* Logo */}
-      <img src={logo} alt="logo" className="w-20 h-12" />
+   
+   
+   
+        <img  src={logo} alt="logo" className="w-20 h-12" />
+        
+
 
       {/* Desktop Nav Links */}
       <ul className="hidden sm:flex gap-5 text-sm text-gray-700">
