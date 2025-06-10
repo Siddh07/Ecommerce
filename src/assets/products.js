@@ -22,7 +22,7 @@ const products = [
     image: product1,
     name: "Green Hoodie",
     price: 39.99,
-    bestseller: true,
+    bestseller: false,
   },
   {
     id: 4,
