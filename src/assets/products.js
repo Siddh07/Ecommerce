@@ -17,6 +17,20 @@ const products = [
     bestseller: false,
 
   },
+  {
+    id: 3,
+    image: product1,
+    name: "Green Hoodie",
+    price: 39.99,
+    bestseller: true,
+  },
+  {
+    id: 4,
+    image: product2,
+    name: "Black Sneakers",
+    price: 59.99,
+    bestseller: false,
+  },    
 ];
 
 export default products;
