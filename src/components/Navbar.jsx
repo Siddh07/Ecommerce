@@ -12,31 +12,29 @@ const Navbar = () => {
   return (
     <nav className="flex items-center justify-between py-5 font-medium relative px-4 sm:px-8">
    
-   
-   
-        <img  src={logo} alt="logo" className="w-20 h-12" />
-        
-
+        <a href="/" className="flex items-center gap-2">
+        <img src={logo} alt="logo" className="aspect-square w-12 object-contain mix-blend-color-burn" />
+        </a>
 
       {/* Desktop Nav Links */}
-      <ul className="hidden sm:flex gap-5 text-sm text-gray-700">
+      <ul className="hidden sm:flex gap-5 text-sm text-neutral-500">
         <li>
-          <NavLink to="/" className="hover:text-black">
+          <NavLink to="/" className="hover:text-neutral-800">
             HOME
           </NavLink>
         </li>
         <li>
-          <NavLink to="/collection" className="hover:text-black">
+          <NavLink to="/collection" className="hover:text-neutral-800">
             COLLECTION
           </NavLink>
         </li>
         <li>
-          <NavLink to="/contact" className="hover:text-black">
+          <NavLink to="/contact" className="hover:text-neutral-800">
             CONTACT
           </NavLink>
         </li>
         <li>
-          <NavLink to="/about" className="hover:text-black">
+          <NavLink to="/about" className="hover:text-neutral-800">
             ABOUT
           </NavLink>
         </li>
