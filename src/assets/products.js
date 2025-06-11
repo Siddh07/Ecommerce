@@ -4,10 +4,12 @@ import product2 from "./images/picture2.png";
 const products = [
   {
     id: 1,
-    image: product1,  // renamed from 'src' to 'image' for consistency
-    name: "Red T-shirt",  // renamed from 'alt' to 'name'
+    image: product1,
+    name: "Red T-shirt",
     price: 19.99,
     bestseller: true,
+    category: "Women",
+    subCategory: "TopWear",
   },
   {
     id: 2,
@@ -15,7 +17,7 @@ const products = [
     name: "Blue Jeans",
     price: 49.99,
     bestseller: false,
-
+    category: "Women",
   },
 ];
 
