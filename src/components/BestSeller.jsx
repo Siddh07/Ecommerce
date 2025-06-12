@@ -1,43 +1,38 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ShopContext } from "../context/ShopContext";
-import Title from "./Title"; // Make sure you have this component or adjust as needed
+import Title from "./Title";
 
 const BestSeller = () => {
   const { products } = useContext(ShopContext);
   const [bestSeller, setBestSeller] = useState([]);
 
   useEffect(() => {
-    // Only filter if products is an array
     if (Array.isArray(products)) {
-      // Get the first 5 bestsellers (if that's your intent)
-      setBestSeller(
-        products.filter((product) => product.bestseller).slice(0, 5)
-      );
+      const filtered = products
+        .filter((product) => product.bestseller)
+        .sort((a, b) => b.id - a.id)
+        .slice(0, 2);
+      setBestSeller(filtered);
     }
-  }, [products]); // Depend on products, not products.slice(0,5)
+  }, [products]);
 
   return (
     <div className="my-10">
       <div className="text-center text-3xl py-8">
         <Title text1={"BEST"} text2={"SELLER"} />
-
         <p className="w-3/4 m-auto sm:text-sm md:text-base text-gray-600">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eaque odit
-          commodi modi. Harum voluptate temporibus repellendus, impedit
-          voluptatum sint expedita repellat officiis illum ad ducimus veniam
-          labore, aspernatur quis amet?
+          Discover our top-performing products, loved by thousands.
         </p>
       </div>
-      {/* Render best sellers here if needed */}
-      <div className="flex flex-wrap justify-center gap-6">
-        {bestSeller.map((product) => (
-          <div key={product.id} className="p-4 border rounded shadow">
-            {/* Add more product details as needed */}
 
-            <div className="grid grid-cols-2 gap-4">
-              <img src={product.image} alt={product.alt} className="hover:bg-neutral-600 w-full h-[100%]"/>
-              <div></div>
-            </div>
+      <div className="grid grid-cols-2 w-full max-w-screen-xl mx-auto">
+        {bestSeller.map((product) => (
+          <div key={product.id} className="p-0 m-0">
+            <img
+              src={product.image}
+              alt={product.name}
+              className="w-auto h-full object-cover"
+            />
           </div>
         ))}
       </div>

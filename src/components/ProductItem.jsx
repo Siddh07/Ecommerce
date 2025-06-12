@@ -7,11 +7,11 @@ const ProductItem = ({ id, image, name, price }) => {
 
   return (
     <Link className="text-gray-700 cursor-pointer" to={`/product/${id}`}>
-      <div className="overflow-hidden">
+      <div className="w-full aspect-square overflow-hidden">
         <img
           src={image}
           alt={name}
-          className="hover:scale-110 transition ease-in-out"
+          className="w-full h-auto max-w-[300px] mx-auto object-cover transition-transform hover:scale-110 ease-in-out"
         />
       </div>
       <p className="pt-3 b-1 text-sm">{name}</p>
