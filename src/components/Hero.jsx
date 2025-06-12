@@ -1,6 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+
+import img1 from '../assets/images/new1.png';
+import img2 from '../assets/images/new2.png';
+import img3 from '../assets/images/new3.png';
+
+const images = [img1, img2, img3];
 
 const Hero = () => {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 15000); // 15 seconds
+
+    return () => clearInterval(interval); // Cleanup on unmount
+  }, []);
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="flex flex-col sm:flex-row border border-gray-400 rounded-lg overflow-hidden shadow-lg">
@@ -30,10 +46,10 @@ const Hero = () => {
         </div>
 
         {/* Right Side */}
-        <div className="w-full sm:w-1/2">
+        <div className="w-full sm:w-1/2 bg-neutral-200 relative overflow-hidden">
           <img
-            className="w-full h-full object-cover"
-            src="https://via.placeholder.com/600x400"
+            className="w-full h-full object-cover transition-opacity duration-1000 ease-in-out"
+            src={images[currentImageIndex]}
             alt="Hero"
           />
         </div>
