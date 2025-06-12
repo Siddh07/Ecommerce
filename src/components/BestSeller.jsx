@@ -35,16 +35,8 @@ const BestSeller = () => {
             {/* Add more product details as needed */}
 
             <div className="grid grid-cols-2 gap-4">
-              <img src={product.image} alt={product.alt} />
-
+              <img src={product.image} alt={product.alt} className="hover:bg-neutral-600 w-full h-[100%]"/>
               <div></div>
-              <div>
-                <h3 className="font-semibold">{product.name}</h3>
-
-                <p>{product.alt}</p>
-
-                <p>${product.price}</p>
-              </div>
             </div>
           </div>
         ))}
