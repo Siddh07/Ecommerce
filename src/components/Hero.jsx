@@ -14,7 +14,7 @@ const Hero = () => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
     }, 15000); // 15 seconds
 
-    return () => clearInterval(interval); // Cleanup on unmount
+    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -23,7 +23,7 @@ const Hero = () => {
         
         {/* Left Side */}
         <div className="w-full sm:w-1/2 flex flex-col justify-center items-center sm:items-start p-8 bg-white">
-          <div className="text-[#414141] max-w-md">
+          <div className="text-red-600 max-w-md">
             {/* Small line and label */}
             <div className="flex items-center gap-3 mb-4">
               <div className="w-12 h-[2px] bg-[#414141]"></div>
@@ -31,16 +31,16 @@ const Hero = () => {
             </div>
 
             {/* Heading */}
-            <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6">
+            <h1 className="text-4xl md:text-6xl font-bold text-neutral-700 leading-tight mb-6">
               NEW ARRIVALS
             </h1>
 
             {/* Shop Now */}
             <div className="flex items-center gap-4">
-              <button className="font-semibold text-sm md:text-base text-white bg-[#414141] px-6 py-2 rounded hover:bg-gray-700 transition">
+              <button className="font-semibold text-sm md:text-base border-2 text-white bg-neutral-800 px-6 py-2 rounded hover:border-neutral-800 hover:bg-neutral-50 hover:text-neutral-800 transition ease-in-out duration-500">
                 SHOP NOW
               </button>
-              <div className="w-16 h-[1px] bg-[#414141]"></div>
+              <div className="w-16 h-[1px] bg-neutral-800"></div>
             </div>
           </div>
         </div>

@@ -17,14 +17,14 @@ const LatestCollection = () => {
 
   return (
     <div className="my-10">
-      <div className="text-center py-8 text-3xl font-bold">
+      <div className="text-center px-2 md:px-auto py-6 md:py-8 text-xl md:text-4xl font-bold">
         <Title text1={"LATEST"} text2={"COLLECTION"} />
-        <p className="w-3/4 m-auto sm:text-sm md:text-base text-gray-500">
+        <p className="w-3/4 m-auto text-sm md:text-2xl text-gray-500">
           Discover our latest collection of products, handpicked to bring you the best in style and quality.
         </p>
       </div>
 
-      <div className="max-w-screen-xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="max-w-screen-xl mx-auto px-2 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-6">
         {latestProducts.map((item) => (
           <ProductItem
             key={item.id}
