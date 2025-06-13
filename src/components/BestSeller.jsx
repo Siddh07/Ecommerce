@@ -27,13 +27,29 @@ const BestSeller = () => {
 
       <div className="grid grid-cols-2 w-full max-w-screen-xl mx-auto">
         {bestSeller.map((product) => (
-          <div key={product.id} className="p-0 m-0">
+         <div
+            key={product.id}
+            className="aspect-square overflow-hidden relative group"
+          >
+            {/* Product Image */}
             <img
               src={product.image}
               alt={product.name}
-              className="w-auto h-full object-cover"
+              loading="lazy"
+              className="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
             />
+
+            {/* Overlay Action Buttons */}
+            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex flex-col justify-center items-center gap-3 transition-opacity duration-500 ease-in-out">
+              <button className="px-4 py-2 text-sm font-medium rounded-sm bg-white text-gray-800 hover:bg-gray-900 hover:text-neutral-50 transition duration-500 ease-in-out">
+                Add to Cart
+              </button>
+              <button className="px-4 py-2 text-sm font-medium border-black hover:border-neutral-700 bg-neutral-900 text-white rounded hover:bg-neutral-50 hover:text-neutral-800 transition duration-500 ease-in-out">
+                Buy Now
+              </button>
+            </div>
           </div>
+
         ))}
       </div>
     </div>

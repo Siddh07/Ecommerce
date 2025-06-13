@@ -3,8 +3,10 @@ import React, { useEffect, useState } from 'react';
 import img1 from '../assets/images/new1.png';
 import img2 from '../assets/images/new2.png';
 import img3 from '../assets/images/new3.png';
+import img4 from '../assets/images/new4.png';
+import img5 from '../assets/images/new5.png';
 
-const images = [img1, img2, img3];
+const images = [img1, img2, img3, img4, img5];
 
 const Hero = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -46,13 +48,13 @@ const Hero = () => {
         </div>
 
         {/* Right Side */}
-        <div className="w-full sm:w-1/2 bg-neutral-200 relative overflow-hidden">
+        <div className="w-full sm:w-1/2 bg-neutral-200 relative overflow-hidden aspect-square">
           <img
             className="w-full h-full object-cover transition-opacity duration-1000 ease-in-out"
             src={images[currentImageIndex]}
             alt="Hero"
           />
-        </div>
+        </div> 
       </div>
     </div>
   );
