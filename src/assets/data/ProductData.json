@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "imageKey": "product1",
+    "name": "Red T-shirt",
+    "price": 19.99,
+    "bestseller": true,
+    "category": "Women",
+    "subCategory": "TopWear"
+  },
+  {
+    "id": 2,
+    "imageKey": "product2",
+    "name": "Blue Jeans",
+    "price": 49.99,
+    "bestseller": false,
+    "category": "Women",
+    "subCategory": "BottomWear"
+  },
+  {
+    "id": 3,
+    "imageKey": "product3",
+    "name": "Black Hoodie",
+    "price": 39.99,
+    "bestseller": true,
+    "category": "Men",
+    "subCategory": "WinterWear"
+  },
+  {
+    "id": 4,
+    "imageKey": "product4",
+    "name": "Green Dress",
+    "price": 59.99,
+    "bestseller": false,
+    "category": "Women",
+    "subCategory": "Dresses"
+  },
+  {
+    "id": 5,
+    "imageKey": "product5",
+    "name": "Running Shoes",
+    "price": 89.99,
+    "bestseller": true,
+    "category": "Unisex",
+    "subCategory": "Footwear"
+  },
+  {
+    "id": 6,
+    "imageKey": "product6",
+    "name": "Casual Shirt",
+    "price": 29.99,
+    "bestseller": false,
+    "category": "Men",
+    "subCategory": "TopWear"
+  },
+  {
+    "id": 7,
+    "imageKey": "product7",
+    "name": "White Sneakers",
+    "price": 99.99,
+    "bestseller": true,
+    "category": "Unisex",
+    "subCategory": "Footwear"
+  },
+  {
+    "id": 8,
+    "imageKey": "product8",
+    "name": "Denim Jacket",
+    "price": 69.99,
+    "bestseller": true,
+    "category": "Women",
+    "subCategory": "WinterWear"
+  }
+]

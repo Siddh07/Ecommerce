@@ -19,26 +19,57 @@ const Navbar = () => {
       {/* Desktop Nav Links */}
       <ul className="hidden sm:flex gap-5 text-sm text-neutral-500">
         <li>
-          <NavLink to="/" className="hover:text-neutral-800">
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              isActive ? "text-black font-semibold" : "hover:text-neutral-800"
+            }
+          >
             HOME
           </NavLink>
         </li>
         <li>
-          <NavLink to="/collection" className="hover:text-neutral-800">
+          <NavLink
+            to="/collection"
+            className={({ isActive }) =>
+              isActive ? "text-black font-semibold" : "hover:text-neutral-800"
+            }
+          >
             COLLECTION
           </NavLink>
         </li>
         <li>
-          <NavLink to="/contact" className="hover:text-neutral-800">
-            CONTACT
+          <NavLink
+            to="/men"
+            className={({ isActive }) =>
+              isActive ? "text-black font-semibold" : "hover:text-neutral-800"
+            }
+          >
+            MEN
           </NavLink>
         </li>
         <li>
-          <NavLink to="/about" className="hover:text-neutral-800">
-            ABOUT
+          <NavLink
+            to="/women"
+            className={({ isActive }) =>
+              isActive ? "text-black font-semibold" : "hover:text-neutral-800"
+            }
+          >
+            WOMEN
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/kids"
+            className={({ isActive }) =>
+              isActive ? "text-black font-semibold" : "hover:text-neutral-800"
+            }
+          >
+            KIDS
           </NavLink>
         </li>
       </ul>
+
 
       {/* Icons and Hamburger */}
       <div className="flex items-center gap-6 relative">
@@ -117,31 +148,40 @@ const Navbar = () => {
 
           {/* Sidebar Nav Links */}
           <nav className="flex flex-col gap-4 p-4">
-            <NavLink
+           <NavLink
               to="/"
               onClick={() => setVisible(false)}
-              className="py-2 pl-6  hover:bg-gray-100 rounded"
+              className={({ isActive }) =>
+                `py-2 pl-6 rounded hover:bg-gray-100 ${isActive ? "bg-gray-200 font-semibold text-black" : ""}`
+              }
             >
               HOME
             </NavLink>
+
             <NavLink
               to="/collection"
               onClick={() => setVisible(false)}
-              className="py-2 pl-6  hover:bg-gray-100 rounded"
+               className={({ isActive }) =>
+                `py-2 pl-6 rounded hover:bg-gray-100 ${isActive ? "bg-gray-200 font-semibold text-black" : ""}`
+              }
             >
               COLLECTION
             </NavLink>
             <NavLink
               to="/contact"
               onClick={() => setVisible(false)}
-              className="py-2 pl-6  hover:bg-gray-100 rounded"
+              className={({ isActive }) =>
+                `py-2 pl-6 rounded hover:bg-gray-100 ${isActive ? "bg-gray-200 font-semibold text-black" : ""}`
+              }
             >
               CONTACT
             </NavLink>
             <NavLink
               to="/about"
               onClick={() => setVisible(false)}
-              className="py-2 pl-6  hover:bg-gray-100 rounded"
+              className={({ isActive }) =>
+                `py-2 pl-6 rounded hover:bg-gray-100 ${isActive ? "bg-gray-200 font-semibold text-black" : ""}`
+              }
             >
               ABOUT
             </NavLink>
