@@ -5,12 +5,12 @@ export const ShopContext = createContext();
 
 const ShopContextProvider = (props) => {
   const currency = "$";
-  const devlivery = 10;
+  const delivery = 10; // fixed typo
 
   const value = {
     products,
     currency,
-    devlivery,
+    delivery,
   };
 
   return (

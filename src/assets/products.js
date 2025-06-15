@@ -18,6 +18,7 @@ const products = [
     price: 49.99,
     bestseller: false,
     category: "Women",
+    subCategory: "BottomWear", // add subCategory for consistency
   },
 ];
 

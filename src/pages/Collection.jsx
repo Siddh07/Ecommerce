@@ -10,6 +10,7 @@ const Collection = () => {
   const [filterProducts, setFilterProducts] = useState([]);
   const [category, setCategory] = useState([]); // should be array
   const [subCategory, setSubCategory] = useState([]); // should be array
+  const [sortType, setSortType] = useState("default"); // <-- Added state for sort type
 
   const toggleCategory = (e) => {
     if (category.includes(e.target.value)) {
@@ -27,21 +28,33 @@ const Collection = () => {
     }
   };
 
+  // Sort products based on sortType
   useEffect(() => {
-    // Initialize filterProducts with all products
-    setFilterProducts(products);
-  }, [products]);
+    let sortedProducts = [...filterProducts];
+    switch (sortType) {
+      case "low-high":
+        sortedProducts.sort((a, b) => a.price - b.price);
+        break;
+      case "high-low":
+        sortedProducts.sort((a, b) => b.price - a.price);
+        break;
+      default:
+        // No sorting or default sorting logic
+        break;
+    }
+    setFilterProducts(sortedProducts);
+    // eslint-disable-next-line
+  }, [sortType]);
 
+  // Filter products based on category and subCategory
   useEffect(() => {
     let filtered = products;
-
     if (category.length > 0) {
       filtered = filtered.filter((product) => category.includes(product.category));
     }
     if (subCategory.length > 0) {
       filtered = filtered.filter((product) => subCategory.includes(product.subCategory));
     }
-
     setFilterProducts(filtered);
   }, [products, category, subCategory]);
 
@@ -152,7 +165,11 @@ const Collection = () => {
           <div className="flex justify-between items-baseline sm:text-2xl mb-4">
             <Title text1={"ALL"} text2={"PRODUCTS"} />
             {/* Product Sort */}
-            <select className="border-2 border-gray-300 rounded-md p-2 text-sm">
+            <select
+              className="border-2 border-gray-300 rounded-md p-2 text-sm"
+              value={sortType}
+              onChange={(e) => setSortType(e.target.value)}
+            >
               <option value="default">Sort by: Relevant</option>
               <option value="low-high">Price: Low to High</option>
               <option value="high-low">Price: High to Low</option>
