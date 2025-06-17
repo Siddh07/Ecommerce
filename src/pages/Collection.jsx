@@ -1,31 +1,39 @@
 import React, { useContext, useState, useEffect } from "react";
 import { ShopContext } from "../context/ShopContext";
-import { FaLongArrowAltLeft } from "react-icons/fa";
+import { FaLongArrowAltLeft, FaShoppingCart } from "react-icons/fa";
 import Title from "../components/Title";
 
 const Collection = () => {
-  // Accessing the products from the ShopContext
-  const { products } = useContext(ShopContext);
+  const { products, addToCart } = useContext(ShopContext); // Make sure addToCart is available in your context
   const [showFilter, setShowFilter] = useState(false);
   const [filterProducts, setFilterProducts] = useState([]);
-  const [category, setCategory] = useState([]); // should be array
-  const [subCategory, setSubCategory] = useState([]); // should be array
-  const [sortType, setSortType] = useState("default"); // <-- Added state for sort type
+  const [category, setCategory] = useState([]);
+  const [subCategory, setSubCategory] = useState([]);
+  const [sortType, setSortType] = useState("default");
+  const [availableSubCategories, setAvailableSubCategories] = useState([]);
+
+  // Extract unique subcategories from products
+  useEffect(() => {
+    const subCategories = [...new Set(products.map(product => product.subCategory))];
+    setAvailableSubCategories(subCategories);
+  }, [products]);
 
   const toggleCategory = (e) => {
-    if (category.includes(e.target.value)) {
-      setCategory((prev) => prev.filter((item) => item !== e.target.value));
-    } else {
-      setCategory((prev) => [...prev, e.target.value]);
-    }
+    const value = e.target.value;
+    setCategory(prev => 
+      prev.includes(value) 
+        ? prev.filter(item => item !== value) 
+        : [...prev, value]
+    );
   };
 
   const toggleSubCategory = (e) => {
-    if (subCategory.includes(e.target.value)) {
-      setSubCategory((prev) => prev.filter((item) => item !== e.target.value));
-    } else {
-      setSubCategory((prev) => [...prev, e.target.value]);
-    }
+    const value = e.target.value;
+    setSubCategory(prev => 
+      prev.includes(value) 
+        ? prev.filter(item => item !== value) 
+        : [...prev, value]
+    );
   };
 
   // Sort products based on sortType
@@ -39,157 +47,142 @@ const Collection = () => {
         sortedProducts.sort((a, b) => b.price - a.price);
         break;
       default:
-        // No sorting or default sorting logic
+        // Default sorting (newest first)
+        sortedProducts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
         break;
     }
     setFilterProducts(sortedProducts);
-    // eslint-disable-next-line
   }, [sortType]);
 
   // Filter products based on category and subCategory
   useEffect(() => {
     let filtered = products;
     if (category.length > 0) {
-      filtered = filtered.filter((product) => category.includes(product.category));
+      filtered = filtered.filter(product => category.includes(product.category));
     }
     if (subCategory.length > 0) {
-      filtered = filtered.filter((product) => subCategory.includes(product.subCategory));
+      filtered = filtered.filter(product => subCategory.includes(product.subCategory));
     }
     setFilterProducts(filtered);
   }, [products, category, subCategory]);
 
+  // Format price with currency
+  const formatPrice = (price) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD'
+    }).format(price);
+  };
+
   return (
-    <div>
-      <div className="flex flex-col sm:flex-row gap-1 sm:gap-10 pt-1- border-t">
+    <div className="container mx-auto px-4 py-8">
+      <div className="flex flex-col sm:flex-row gap-6">
         {/* Filter Options */}
-        <div className="min-w-60">
-          <p
-            className="my-2 text-xl flex items-center cursor-pointer gap-2"
-            onClick={() => setShowFilter((prev) => !prev)}
+        <div className="w-full sm:w-64 bg-white p-4 rounded-lg shadow-sm">
+          <div 
+            className="flex justify-between items-center cursor-pointer py-2"
+            onClick={() => setShowFilter(prev => !prev)}
           >
-            FILTERS
-            <span
-              className={`h-5 w-5 transition-transform duration-200 sm:hidden ${
-                showFilter ? "rotate-90" : ""
-              }`}
-            >
+            <h2 className="text-lg font-semibold">FILTERS</h2>
+            <span className={`transition-transform sm:hidden ${showFilter ? "rotate-90" : "-rotate-90"}`}>
               <FaLongArrowAltLeft />
             </span>
-          </p>
+          </div>
 
           {/* Category Filter */}
-          <div
-            className={`border-b border-gray-300 pl-5 py-3 mt-6 ${
-              showFilter ? "" : "hidden"
-            } sm:block`}
-          >
-            <p className="mb-3 text-sm font-medium">CATEGORIES</p>
-            <div className="flex flex-col gap-2 text-sm font-light text-gray-700">
-              <p className="flex gap-2">
-                <input
-                  type="checkbox"
-                  className="w-4 h-4"
-                  value={"Men"}
-                  onChange={toggleCategory}
-                  checked={category.includes("Men")}
-                />
-                Men
-              </p>
-              <p className="flex gap-2">
-                <input
-                  type="checkbox"
-                  className="w-4 h-4"
-                  value={"Women"}
-                  onChange={toggleCategory}
-                  checked={category.includes("Women")}
-                />
-                Women
-              </p>
-              <p className="flex gap-2">
-                <input
-                  type="checkbox"
-                  className="w-4 h-4"
-                  value={"Children"}
-                  onChange={toggleCategory}
-                  checked={category.includes("Children")}
-                />
-                Children
-              </p>
+          <div className={`border-b border-gray-200 py-4 ${showFilter ? "" : "hidden"} sm:block`}>
+            <h3 className="text-md font-medium mb-3">CATEGORIES</h3>
+            <div className="space-y-2">
+              {['Men', 'Women', 'Children'].map(cat => (
+                <label key={cat} className="flex items-center space-x-2 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    className="rounded text-indigo-600 focus:ring-indigo-500"
+                    value={cat}
+                    onChange={toggleCategory}
+                    checked={category.includes(cat)}
+                  />
+                  <span className="text-gray-700">{cat}</span>
+                </label>
+              ))}
             </div>
           </div>
 
-          {/* Sub Cat Filter */}
-          <div
-            className={`border-b border-gray-300 pl-5 py-3 my-5 ${
-              showFilter ? "" : "hidden"
-            } sm:block`}
-          >
-            <p className="mb-3 text-sm font-medium">TYPE</p>
-            <div className="flex flex-col gap-2 text-sm font-light text-gray-700">
-              <p className="flex gap-2">
-                <input
-                  type="checkbox"
-                  className="w-4 h-4"
-                  value={"TopWear"}
-                  onChange={toggleSubCategory}
-                  checked={subCategory.includes("TopWear")}
-                />
-                TopWear
-              </p>
-              <p className="flex gap-2">
-                <input
-                  type="checkbox"
-                  className="w-4 h-4"
-                  value={"BottomWear"}
-                  onChange={toggleSubCategory}
-                  checked={subCategory.includes("BottomWear")}
-                />
-                BottomWear
-              </p>
-              <p className="flex gap-2">
-                <input
-                  type="checkbox"
-                  className="w-4 h-4"
-                  value={"WinterWear"}
-                  onChange={toggleSubCategory}
-                  checked={subCategory.includes("WinterWear")}
-                />
-                WinterWear
-              </p>
+          {/* Subcategory Filter - Dynamic */}
+          <div className={`py-4 ${showFilter ? "" : "hidden"} sm:block`}>
+            <h3 className="text-md font-medium mb-3">TYPE</h3>
+            <div className="space-y-2">
+              {availableSubCategories.map(subCat => (
+                <label key={subCat} className="flex items-center space-x-2 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    className="rounded text-indigo-600 focus:ring-indigo-500"
+                    value={subCat}
+                    onChange={toggleSubCategory}
+                    checked={subCategory.includes(subCat)}
+                  />
+                  <span className="text-gray-700">{subCat}</span>
+                </label>
+              ))}
             </div>
           </div>
         </div>
 
         {/* Products List */}
         <div className="flex-1">
-          <div className="flex justify-between items-baseline sm:text-2xl mb-4">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
             <Title text1={"ALL"} text2={"PRODUCTS"} />
-            {/* Product Sort */}
-            <select
-              className="border-2 border-gray-300 rounded-md p-2 text-sm"
-              value={sortType}
-              onChange={(e) => setSortType(e.target.value)}
-            >
-              <option value="default">Sort by: Relevant</option>
-              <option value="low-high">Price: Low to High</option>
-              <option value="high-low">Price: High to Low</option>
-            </select>
+            <div className="mt-4 sm:mt-0">
+              <select
+                className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                value={sortType}
+                onChange={(e) => setSortType(e.target.value)}
+              >
+                <option value="default">Sort by: Newest</option>
+                <option value="low-high">Price: Low to High</option>
+                <option value="high-low">Price: High to Low</option>
+              </select>
+            </div>
           </div>
-          {/*  map products here */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-y-6">
-            {filterProducts.map((product) => (
-              <div key={product.id} className="border p-4 rounded-lg">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-full h-48 object-cover mb-4"
-                />
-                <h3 className="text-lg font-semibold mb-2">{product.name}</h3>
-                <p className="text-gray-600 mb-2">{product.description}</p>
-                <p className="text-xl font-bold">{product.price}</p>
-              </div>
-            ))}
-          </div>
+
+          {filterProducts.length === 0 ? (
+            <div className="text-center py-12">
+              <p className="text-gray-500 text-lg">No products match your filters</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {filterProducts.map((product) => (
+                <div key={product.id} className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
+                  <div className="relative pb-[120%] overflow-hidden">
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="absolute h-full w-full object-cover hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                  <div className="p-4">
+                    <div className="flex justify-between items-start">
+                      <h3 className="text-md font-semibold mb-1 line-clamp-2">{product.name}</h3>
+                      <span className="bg-indigo-100 text-indigo-800 text-xs px-2 py-1 rounded-full">
+                        {product.category}
+                      </span>
+                    </div>
+                    <p className="text-gray-600 text-sm mb-3 line-clamp-2">{product.description}</p>
+                    <div className="flex justify-between items-center">
+                      <p className="lg:text-lg md:text-sm sm:text-xl font-bold text-gray-900">{formatPrice(product.price)}</p>
+                      <button 
+                        className="flex items-center gap-1 text-indigo-600 hover:text-indigo-800 font-medium"
+                        onClick={() => addToCart(product)}
+                      >
+                        <FaShoppingCart className="text-base" />
+                        <span>Add</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>

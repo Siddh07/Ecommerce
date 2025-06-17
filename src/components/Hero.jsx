@@ -48,7 +48,7 @@ const Hero = () => {
         </div>
 
         {/* Right Side */}
-        <div className="w-full sm:w-1/2 bg-neutral-200 relative overflow-hidden aspect-square">
+        <div className="w-full sm:w-1/2 bg-neutral-300/70 relative overflow-hidden aspect-square">
           <img
             className="w-full h-full object-cover transition-opacity duration-1000 ease-in-out"
             src={images[currentImageIndex]}

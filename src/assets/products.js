@@ -19,7 +19,6 @@ const products = [
     price: 49.99,
     bestseller: false,
     category: "Women",
-<<<<<<< HEAD
     subCategory: "BottomWear",
     latest: false,
   },
@@ -49,7 +48,7 @@ const products = [
     name: "White Sneakers",
     price: 59.99,
     bestseller: true,
-    category: "Unisex",
+    category: "Children",
     subCategory: "Footwear",
     latest: true,
   },
@@ -82,8 +81,6 @@ const products = [
     category: "Men",
     subCategory: "Footwear",
     latest: false,
-=======
->>>>>>> bfcdc7cfe3e0ce4b548f65754ed3f24cbab7e75c
   },
 ];
 
