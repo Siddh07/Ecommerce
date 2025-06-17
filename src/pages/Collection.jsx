@@ -4,7 +4,7 @@ import { FaLongArrowAltLeft, FaShoppingCart } from "react-icons/fa";
 import Title from "../components/Title";
 
 const Collection = () => {
-  const { products, addToCart } = useContext(ShopContext); // Make sure addToCart is available in your context
+  const { products, addToCart } = useContext(ShopContext);
   const [showFilter, setShowFilter] = useState(false);
   const [filterProducts, setFilterProducts] = useState([]);
   const [category, setCategory] = useState([]);
@@ -47,7 +47,6 @@ const Collection = () => {
         sortedProducts.sort((a, b) => b.price - a.price);
         break;
       default:
-        // Default sorting (newest first)
         sortedProducts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
         break;
     }
@@ -78,7 +77,7 @@ const Collection = () => {
     <div className="container mx-auto px-4 py-8">
       <div className="flex flex-col sm:flex-row gap-6">
         {/* Filter Options */}
-        <div className="w-full sm:w-64 bg-white p-4 rounded-lg shadow-sm">
+        <div className="w-full sm:w-64 bg-white p-4 rounded-lg shadow-sm border-b border-neutral-300"> {/* Added border here */}
           <div 
             className="flex justify-between items-center cursor-pointer py-2"
             onClick={() => setShowFilter(prev => !prev)}
@@ -90,7 +89,7 @@ const Collection = () => {
           </div>
 
           {/* Category Filter */}
-          <div className={`border-b border-gray-200 py-4 ${showFilter ? "" : "hidden"} sm:block`}>
+          <div className={`border-b border-neutral-300 py-4 ${showFilter ? "" : "hidden"} sm:block`}>
             <h3 className="text-md font-medium mb-3">CATEGORIES</h3>
             <div className="space-y-2">
               {['Men', 'Women', 'Children'].map(cat => (
