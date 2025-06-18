@@ -48,7 +48,7 @@ const products = [
     name: "White Sneakers",
     price: 59.99,
     bestseller: true,
-    category: "Children",
+    category: "Kids",
     subCategory: "Footwear",
     latest: true,
   },
