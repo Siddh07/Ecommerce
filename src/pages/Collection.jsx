@@ -92,7 +92,8 @@ const Collection = () => {
           <div className={`border-b border-neutral-300 py-4 ${showFilter ? "" : "hidden"} sm:block`}>
             <h3 className="text-md font-medium mb-3">CATEGORIES</h3>
             <div className="space-y-2">
-              {['Men', 'Women', 'Children'].map(cat => (
+              {/* Match product data categories */}
+              {['Men', 'Women', 'Kids'].map(cat => (
                 <label key={cat} className="flex items-center space-x-2 cursor-pointer">
                   <input
                     type="checkbox"

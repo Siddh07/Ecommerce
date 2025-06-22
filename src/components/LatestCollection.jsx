@@ -1,7 +1,8 @@
 import React, { useContext, useState, useEffect } from "react";
 import { ShopContext } from "../context/ShopContext";
 import Title from "./Title";
-import ProductItem from "./productitem";
+// Correct casing to match file system
+import ProductItem from "./ProductItem";
 
 const LatestCollection = () => {
   const { products } = useContext(ShopContext);
