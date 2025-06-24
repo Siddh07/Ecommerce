@@ -69,44 +69,20 @@
       "Sunglasses"
     ]
   },
-  {
-    "name": "kids",
-    "subcategories": [
-      "Boys",
-      "T-Shirts",
-      "Shirts",
-      "Pants",
-      "Shorts",
-      "Jackets",
-      "Shoes",
-      "Girls",
-      "Dresses",
-      "Tops",
-      "Skirts",
-      "Leggings",
-      "Shoes",
-      "Baby",
-      "Bodysuits",
-      "Rompers",
-      "Sleepwear",
-      "Swimwear",
-      "Toys",
-      "Stuffed Animals",
-      "Educational Toys",
-      "Outdoor Toys",
-      "Accessories",
-      "Hats",
-      "Gloves",
-      "Backpacks",
-      "School Uniforms",
-      "Seasonal",
-      "Winter Wear",
-      "Summer Wear",
-      "Costumes",
-      "Sports",
-      "Soccer",
-      "Basketball",
-      "Swim"
-    ]
-  }
+ {
+  "name": "kids",
+  "subcategories": [
+    "Boys Clothing",
+    "Boys Shoes",
+    "Girls Clothing", 
+    "Girls Shoes",
+    "Baby Clothing",
+    "Baby Shoes",
+    "Toys",
+    "Accessories",
+    "School Uniforms",
+    "Seasonal Wear",
+    "Sports"
+  ]
+}
 ]
