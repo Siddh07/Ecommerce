@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom"; // Add this import
 import { ShopContext } from "../context/ShopContext";
 import { FaLongArrowAltLeft, FaShoppingCart } from "react-icons/fa";
 import Title from "../components/Title";
@@ -11,6 +12,7 @@ const Collection = () => {
   const [subCategory, setSubCategory] = useState([]);
   const [sortType, setSortType] = useState("default");
   const [availableSubCategories, setAvailableSubCategories] = useState([]);
+  const navigate = useNavigate(); // Initialize navigate
 
   // Extract unique subcategories from products
   useEffect(() => {
@@ -77,7 +79,7 @@ const Collection = () => {
     <div className="container mx-auto px-4 py-8">
       <div className="flex flex-col sm:flex-row gap-6">
         {/* Filter Options */}
-        <div className="w-full sm:w-64 bg-white p-4 rounded-lg shadow-sm border-b border-neutral-300"> {/* Added border here */}
+        <div className="w-full sm:w-64 bg-white p-4 rounded-lg shadow-sm border-b border-neutral-300">
           <div 
             className="flex justify-between items-center cursor-pointer py-2"
             onClick={() => setShowFilter(prev => !prev)}
@@ -151,7 +153,11 @@ const Collection = () => {
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {filterProducts.map((product) => (
-                <div key={product.id} className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
+                <div
+                  key={product.id}
+                  className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 cursor-pointer"
+                  onClick={() => navigate(`/product/${product.id}`)} // Add redirect on click
+                >
                   <div className="relative pb-[120%] overflow-hidden">
                     <img
                       src={product.image}
@@ -169,9 +175,12 @@ const Collection = () => {
                     <p className="text-gray-600 text-sm mb-3 line-clamp-2">{product.description}</p>
                     <div className="flex justify-between items-center">
                       <p className="lg:text-lg md:text-sm sm:text-xl font-bold text-gray-900">{formatPrice(product.price)}</p>
-                      <button 
+                      <button
                         className="flex items-center gap-1 text-indigo-600 hover:text-indigo-800 font-medium"
-                        onClick={() => addToCart(product)}
+                        onClick={e => {
+                          e.stopPropagation(); // Prevent card click
+                          addToCart(product);
+                        }}
                       >
                         <FaShoppingCart className="text-base" />
                         <span>Add</span>
