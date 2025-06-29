@@ -19,7 +19,7 @@ const products = [
     price: 49.99,
     bestseller: false,
     category: "Women",
-    subCategory: "BottomWear",
+    subCategory: "TopWear",
     latest: false,
   },
   {
@@ -28,7 +28,7 @@ const products = [
     name: "Black Hoodie",
     price: 39.99,
     bestseller: true,
-    category: "Men",
+    category: "Women",
     subCategory: "TopWear",
     latest: false,
   },
