@@ -158,8 +158,8 @@ const Navbar = () => {
         onMouseLeave={handleMouseLeave}
       >
         {/* Logo */}
-        <NavLink to="/" className="flex items-center gap-2">
-          <img src={logo} alt="logo" className="aspect-square w-12 object-contain mix-blend-color-burn" />
+        <NavLink to="/" className="flex items-center gap-2 rounded">
+         <img src={logo} alt="logo" className="aspect-square w-12 object-contain mix-blend-color-burn" />
         </NavLink>
 
         {/* Desktop Navigation */}
