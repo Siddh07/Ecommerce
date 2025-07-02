@@ -161,7 +161,7 @@ const Collection = () => {
                 >
                   <div className="relative pb-[120%] overflow-hidden">
                     <img
-                      src={product.image}
+                      src={Array.isArray(product.image) ? product.image[0] : product.image}
                       alt={product.name}
                       className="absolute h-full w-full object-cover hover:scale-105 transition-transform duration-300"
                     />

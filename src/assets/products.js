@@ -4,17 +4,19 @@ import product2 from "./images/picture2.png";
 const products = [
   {
     id: 1,
-    image: product1,
-    name: "Red T-shirt",
+    image: [product1, product2],
+    name: "Draft",
     price: 19.99,
     bestseller: true,
     category: "Women",
     subCategory: "TopWear",
     latest: true,
+
+
   },
   {
     id: 2,
-    image: product2,
+    image: [product2],
     name: "Blue Jeans",
     price: 49.99,
     bestseller: false,
@@ -24,7 +26,7 @@ const products = [
   },
   {
     id: 3,
-    image: product1,
+    image: [product1],
     name: "Black Hoodie",
     price: 39.99,
     bestseller: true,
@@ -34,7 +36,7 @@ const products = [
   },
   {
     id: 4,
-    image: product2,
+    image: [product2],
     name: "Green Skirt",
     price: 29.99,
     bestseller: false,
@@ -44,7 +46,7 @@ const products = [
   },
   {
     id: 5,
-    image: product1,
+    image: [product1],
     name: "White Sneakers",
     price: 59.99,
     bestseller: true,
@@ -54,7 +56,7 @@ const products = [
   },
   {
     id: 6,
-    image: product2,
+    image: [product2],
     name: "Denim Jacket",
     price: 69.99,
     bestseller: false,
@@ -64,7 +66,7 @@ const products = [
   },
   {
     id: 7,
-    image: product1,
+    image: [product1],
     name: "Summer Dress",
     price: 39.99,
     bestseller: true,
@@ -74,7 +76,7 @@ const products = [
   },
   {
     id: 8,
-    image: product2,
+    image: [product2],
     name: "Black Formal Shoes",
     price: 89.99,
     bestseller: false,

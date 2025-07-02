@@ -32,7 +32,7 @@ const LatestCollection = () => {
           <ProductItem
             key={item.id}
             id={item.id}
-            image={item.image}
+            image={Array.isArray(item.image) ? item.image[0] : item.image}
             name={item.name}
             price={item.price}
           />
