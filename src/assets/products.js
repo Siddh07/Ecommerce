@@ -5,7 +5,7 @@ const products = [
   {
     id: 1,
     image: [product1, product2],
-    name: "Draft",
+    name: "Top Wear T-Shirt",
     price: 19.99,
     bestseller: true,
     category: "Women",
@@ -17,7 +17,7 @@ const products = [
   {
     id: 2,
     image: [product2],
-    name: "Blue Jeans",
+    name: "Kurtha",
     price: 49.99,
     bestseller: false,
     category: "Women",
@@ -27,7 +27,7 @@ const products = [
   {
     id: 3,
     image: [product1],
-    name: "Black Hoodie",
+    name: "Top Wear T-Shirt",
     price: 39.99,
     bestseller: true,
     category: "Women",

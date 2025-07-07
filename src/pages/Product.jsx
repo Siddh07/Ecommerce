@@ -10,7 +10,18 @@ const Product = () => {
   const [productData, setProductData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [selectedImage, setSelectedImage] = useState(0); // Only this state needed
+  const [selectedImage, setSelectedImage] = useState(0);
+  const [selectedSize, setSelectedSize] = useState(null);
+
+  const sizes = [
+    { label: "XXS", available: false },
+    { label: "XS", available: false },
+    { label: "S", available: true },
+    { label: "M", available: true },
+    { label: "L", available: true },
+    { label: "XL", available: true },
+    { label: "XXL", available: false }
+  ];
 
   useEffect(() => {
     setLoading(true);
@@ -21,7 +32,7 @@ const Product = () => {
       );
       if (foundProduct) {
         setProductData(foundProduct);
-        setSelectedImage(0); // Reset to first image on product change
+        setSelectedImage(0);
         setLoading(false);
       } else {
         setProductData(null);
@@ -38,7 +49,6 @@ const Product = () => {
     }).format(price);
   };
 
-  // Find related products
   const relatedProducts =
     productData
       ? products.filter(
@@ -52,7 +62,6 @@ const Product = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-[60vh]">
-        {/* Spinner SVG */}
         <svg
           className="animate-spin h-8 w-8 text-indigo-600 mr-3"
           viewBox="0 0 24 24"
@@ -87,10 +96,9 @@ const Product = () => {
 
   return (
     <div className="container mx-auto px-4 py-10 min-h-[60vh]">
-      {/* Main Product Box */}
       <div className="bg-white rounded-xl shadow-lg p-6 sm:p-10 border-t-2 max-w-4xl mx-auto transition-opacity ease-in duration-500 opacity-100">
         <div className="flex flex-col md:flex-row gap-10">
-          {/* Product Image */}
+          {/* Product Image + Thumbnails */}
           <div className="flex-1 flex flex-col items-center justify-center">
             <div className="w-full max-w-xs aspect-[4/5] bg-gray-100 rounded-lg shadow-lg border overflow-hidden flex items-center justify-center">
               <Zoom>
@@ -105,7 +113,6 @@ const Product = () => {
                 />
               </Zoom>
             </div>
-            {/* Thumbnail Images */}
             <div className="flex gap-2 mt-4">
               {Array.isArray(productData.image) &&
                 productData.image.map((img, idx) => (
@@ -127,24 +134,28 @@ const Product = () => {
                 ))}
             </div>
           </div>
+
           {/* Product Details */}
           <div className="flex-1 flex flex-col justify-center">
             <h2 className="text-3xl font-bold mb-4 text-gray-900">
               {productData.name}
             </h2>
+
             <Link
               to={`/collection?category=${encodeURIComponent(
                 productData.category
               )}`}
-              className="inline-block bg-indigo-100 text-indigo-800 text-xs px-3 py-1 rounded-full mb-3 uppercase tracking-wide hover:bg-indigo-200 transition"
+              className="inline-block bg-indigo-100 text-blue-800 text-xs px-3 py-1 rounded-full mb-3 uppercase tracking-wide hover:bg-indigo-200 transition"
             >
               {productData.category}
             </Link>
+
             <p className="mb-6 text-gray-700 text-base leading-relaxed">
               {productData.description}
             </p>
+
             <div className="flex items-center gap-4 mb-6">
-              <span className="text-2xl font-bold text-indigo-700">
+              <span className="text-2xl font-bold text-black-600">
                 {formatPrice(productData.price)}
               </span>
               {productData.oldPrice && (
@@ -153,28 +164,72 @@ const Product = () => {
                 </span>
               )}
             </div>
+
+            {/* Size Selector */}
+            <div className="mb-6">
+              <div className="text-gray-700 font-medium mb-2">
+                Size: {selectedSize ? `WOMEN ${selectedSize}` : "Please select"}
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {sizes.map((size) => (
+                  <button
+                    key={size.label}
+                    disabled={!size.available}
+                    onClick={() =>
+                      size.available && setSelectedSize(size.label)
+                    }
+                    className={`border w-12 h-12 flex items-center justify-center text-sm font-bold rounded
+                    ${
+                      !size.available
+                        ? "line-through text-gray-400 cursor-not-allowed"
+                        : ""
+                    }
+                    ${
+                      selectedSize === size.label
+                        ? "bg-black text-white"
+                        : "bg-white"
+                    }
+                    hover:border-black focus:outline-none`}
+                  >
+                    {size.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Add to Cart */}
             <button
-              className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-8 rounded-lg shadow transition duration-200 text-lg"
+              disabled={!selectedSize}
+              className={`${
+                !selectedSize ? "opacity-50 cursor-not-allowed" : ""
+              } bg-red-700 hover:bg-white hover:text-red-700 text-white font-semibold py-3 px-8 rounded-lg shadow transition duration-200 text-lg`}
               onClick={() => addToCart && addToCart(productData)}
             >
               Add to Cart
             </button>
+
             <div className="mt-8">
-              <h3 className="text-lg font-semibold mb-2">Product Details</h3>
-              <ul className="list-disc list-inside text-gray-600 space-y-1">
+              <h3 className="text-lg font-semibold mb-2 text-red-700">Product Details</h3>
+
+              <ul className="list-disc list-inside text-gray-800 space-y-1">
                 <li>
                   Category:{" "}
                   <Link
                     to={`/collection?category=${encodeURIComponent(
                       productData.category
                     )}`}
-                    className="text-indigo-700 hover:underline"
+                    className="text-red-600 hover:underline"
                   >
                     {productData.category}
                   </Link>
                 </li>
                 {productData.subCategory && (
-                  <li>Type: {productData.subCategory}</li>
+                  <li>
+                    Type:{" "}
+                    <span className="text-gray-800">
+                      {productData.subCategory}
+                    </span>
+                  </li>
                 )}
               </ul>
             </div>
@@ -182,7 +237,7 @@ const Product = () => {
         </div>
       </div>
 
-      {/* Related Products Section */}
+      {/* Related Products */}
       {relatedProducts.length > 0 && (
         <div className="mt-12 max-w-4xl mx-auto">
           <h3 className="text-xl font-semibold mb-4">Related Products</h3>
@@ -195,13 +250,17 @@ const Product = () => {
                 <Link to={`/product/${item.id}`}>
                   <div className="w-full aspect-[4/5] bg-gray-100 rounded mb-3 overflow-hidden flex items-center justify-center">
                     <img
-                      src={Array.isArray(item.image) ? item.image[0] : item.image}
+                      src={
+                        Array.isArray(item.image)
+                          ? item.image[0]
+                          : item.image
+                      }
                       alt={item.name}
                       className="w-full h-full object-cover"
                     />
                   </div>
                   <h4 className="font-bold text-md mb-1">{item.name}</h4>
-                  <p className="text-indigo-700 font-semibold">
+                  <p className="text-red-700 font-semibold">
                     {formatPrice(item.price)}
                   </p>
                 </Link>
