@@ -199,11 +199,11 @@ const Product = () => {
 
             {/* Add to Cart */}
             <button
-              disabled={!selectedSize}
+              // disabled={!selectedSize}
               className={`${
                 !selectedSize ? "opacity-50 cursor-not-allowed" : ""
               } bg-red-700 hover:bg-white hover:text-red-700 text-white font-semibold py-3 px-8 rounded-lg shadow transition duration-200 text-lg`}
-              onClick={() => addToCart && addToCart(productData)}
+              onClick={() => addToCart(productData.id, selectedSize)}
             >
               Add to Cart
             </button>

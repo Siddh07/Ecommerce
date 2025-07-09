@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 import logo from '../assets/images/logo.png';
 import { FiSearch, FiUser, FiShoppingCart, FiX } from 'react-icons/fi';
 import { MdMenu, MdClose } from 'react-icons/md';
 import { GoSidebarCollapse } from 'react-icons/go';
+import { ShopContext } from '../context/ShopContext';
 
 // Import your data files
 import categories from '../assets/data/Categories.json';
@@ -23,6 +24,10 @@ const Navbar = () => {
   const desktopSearchRef = useRef(null);
   const mobileSearchRef = useRef(null);
   const searchInputRef = useRef(null);
+
+  // Context
+  const { getCatCount } = useContext(ShopContext);
+  const cartCount = getCatCount ? getCatCount() : 0;
 
   // Hooks
   const navigate = useNavigate();
@@ -283,9 +288,12 @@ const Navbar = () => {
           {/* Cart */}
           <NavLink to="/cart" className="p-2 rounded-full hover:bg-gray-100 transition relative">
             <FiShoppingCart className="h-6 w-6 text-gray-700" />
-            <span className="absolute top-0 right-0 bg-red-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
-              3
-            </span>
+           {cartCount > 0 && (
+  <span className="absolute top-0 right-0 bg-red-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
+    {cartCount}
+  </span>
+)}
+           
           </NavLink>
 
           {/* Mobile Menu Button */}
