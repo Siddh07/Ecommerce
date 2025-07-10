@@ -5,7 +5,7 @@ const ProductCard = ({ product }) => {
     <div className="group relative">
       <div className="aspect-square w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75">
         <img
-          src={product.image}
+          src={product.image[0]}
           alt={product.name}
           className="h-full w-full object-cover object-center"
         />

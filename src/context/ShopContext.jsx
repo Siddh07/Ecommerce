@@ -40,6 +40,20 @@ const ShopContextProvider = (props) => {
 
   };
 
+
+const removeFromCart = (productId, size) => {
+  let cartData = structuredClone(cartItems);
+  if (cartData[productId] && cartData[productId][size]) {
+    delete cartData[productId][size];
+    if (Object.keys(cartData[productId]).length === 0) {
+      delete cartData[productId];
+    }
+  }
+  setCartItems(cartData);
+};
+
+
+
   const getCatCount = () => {
     let count = 0;
     for (const item in cartItems) {
@@ -53,6 +67,28 @@ const ShopContextProvider = (props) => {
   }
 
 
+  const updateQuantity = (productId, size, quantity) => {
+  let cartData = structuredClone(cartItems);
+
+  if (!cartData[productId]) return;
+  if (quantity <= 0) {
+    // Remove item if quantity is 0 or less
+    if (cartData[productId][size]) {
+      delete cartData[productId][size];
+      if (Object.keys(cartData[productId]).length === 0) {
+        delete cartData[productId];
+      }
+    }
+  } else {
+    cartData[productId][size] = parseInt(quantity);
+  }
+
+  setCartItems(cartData);
+};
+
+
+
+
   const value = {
     products,
     currency,
@@ -60,6 +96,10 @@ const ShopContextProvider = (props) => {
     cartItems,
     addToCart,
     getCatCount,
+    removeFromCart,
+    updateQuantity 
+
+
   };
 
   return (
