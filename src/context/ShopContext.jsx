@@ -1,12 +1,15 @@
 import { createContext, useState, useEffect } from "react";
 import products from "../assets/products";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 export const ShopContext = createContext();
 
 const ShopContextProvider = (props) => {
   const currency = "$";
   const delivery = 10;
   const [cartItems, setCartItems] = useState({});
+  const navigate = useNavigate();
+
 
   const addToCart = (productId, size) => {
     let cartData = structuredClone(cartItems);
@@ -39,6 +42,34 @@ const ShopContextProvider = (props) => {
     setCartItems(cartData);
 
   };
+
+
+const getCartAmount = () => {
+  let totalAmount = 0;
+
+  for (const itemId in cartItems) {
+    const product = products.find(
+      (product) => product.id === parseInt(itemId)
+    );
+
+    if (!product) continue;
+
+    for (const size in cartItems[itemId]) {
+      try {
+        const quantity = cartItems[itemId][size];
+        if (quantity > 0) {
+          totalAmount += product.price * quantity;
+        }
+      } catch (error) {
+        console.error("Error calculating cart amount:", error);
+      }
+    }
+  }
+
+  return totalAmount;
+};
+
+
 
 
 const removeFromCart = (productId, size) => {
@@ -97,7 +128,9 @@ const removeFromCart = (productId, size) => {
     addToCart,
     getCatCount,
     removeFromCart,
-    updateQuantity 
+    updateQuantity ,
+    getCartAmount,
+    navigate,
 
 
   };

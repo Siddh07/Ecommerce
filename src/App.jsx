@@ -12,6 +12,7 @@ import Login from "./pages/Login";
 import CategoryPage from "./pages/CategoryPage";
 import Footer from "./components/Footer";
 import Admin from "./pages/Admin";
+import PlaceOrder from "./pages/PlaceOrder";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -32,6 +33,7 @@ const App = () => {
         <Route path="/category/:category" element={<CategoryPage />} />
         <Route path="/order" element={<Orders />} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/place-order" element={<PlaceOrder />} />
         
         {/* Redirect old routes to new dynamic route */}
         <Route path="/men" element={<CategoryPage />} />
