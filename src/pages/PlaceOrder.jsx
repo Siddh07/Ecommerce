@@ -1,15 +1,17 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ShopContext } from "../context/ShopContext";
 import Title from "../components/Title";
+import orders from "./Orders";
 
 const PlaceOrder = () => {
-  const { cartItems, products, currency, delivery, getCartAmount } = useContext(ShopContext);
+  const { cartItems, products, currency, delivery, getCartAmount, navigate } =
+    useContext(ShopContext);
   const [cartData, setCartData] = useState([]);
 
   useEffect(() => {
     const temp = [];
     for (const itemId in cartItems) {
-      const product = products.find(p => p.id === parseInt(itemId));
+      const product = products.find((p) => p.id === parseInt(itemId));
       if (!product) continue;
 
       for (const size in cartItems[itemId]) {
@@ -49,7 +51,11 @@ const PlaceOrder = () => {
             </div>
             <div className="grid grid-cols-2 gap-4">
               <input type="text" placeholder="Zip Code" className="input" />
-              <input type="text" placeholder="Landmark (optional)" className="input" />
+              <input
+                type="text"
+                placeholder="Landmark (optional)"
+                className="input"
+              />
             </div>
             <input type="tel" placeholder="Phone Number" className="input" />
 
@@ -70,8 +76,9 @@ const PlaceOrder = () => {
             </div>
 
             <button
+              onClick={() => navigate("/orders")}
               type="submit"
-              className="mt-6 w-full bg-green-600 text-white py-3 rounded hover:bg-green-700 transition"
+              className="mt-6 w-full bg-red-600 text-white py-3 rounded hover:bg-black transition"
             >
               Place Order
             </button>
@@ -88,12 +95,20 @@ const PlaceOrder = () => {
               <p className="text-gray-500 text-sm">Your cart is empty.</p>
             ) : (
               cartData.map((item) => (
-                <div key={`${item.id}-${item.size}`} className="flex justify-between text-sm">
+                <div
+                  key={`${item.id}-${item.size}`}
+                  className="flex justify-between text-sm"
+                >
                   <div>
                     <p className="font-medium">{item.name}</p>
-                    <p className="text-gray-500">Size: {item.size} × {item.quantity}</p>
+                    <p className="text-gray-500">
+                      Size: {item.size} × {item.quantity}
+                    </p>
                   </div>
-                  <p>{currency}{item.totalPrice.toFixed(2)}</p>
+                  <p>
+                    {currency}
+                    {item.totalPrice.toFixed(2)}
+                  </p>
                 </div>
               ))
             )}
@@ -103,15 +118,24 @@ const PlaceOrder = () => {
           <div className="mt-4 text-sm">
             <div className="flex justify-between py-1">
               <span>Subtotal</span>
-              <span>{currency}{subtotal.toFixed(2)}</span>
+              <span>
+                {currency}
+                {subtotal.toFixed(2)}
+              </span>
             </div>
             <div className="flex justify-between py-1">
               <span>Shipping</span>
-              <span>{currency}{delivery.toFixed(2)}</span>
+              <span>
+                {currency}
+                {delivery.toFixed(2)}
+              </span>
             </div>
             <div className="flex justify-between py-2 font-semibold border-t mt-2">
               <span>Total</span>
-              <span>{currency}{total.toFixed(2)}</span>
+              <span>
+                {currency}
+                {total.toFixed(2)}
+              </span>
             </div>
           </div>
         </div>

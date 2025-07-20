@@ -8,6 +8,7 @@ const Cart = () => {
   const { products, cartItems, removeFromCart, updateQuantity,navigate } = useContext(ShopContext);
   const [cartProducts, setCartProducts] = useState([]);
 
+
   useEffect(() => {
     const tempData = [];
 
