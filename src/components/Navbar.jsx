@@ -5,7 +5,8 @@ import { FiSearch, FiUser, FiShoppingCart, FiX } from 'react-icons/fi';
 import { MdMenu, MdClose } from 'react-icons/md';
 import { GoSidebarCollapse } from 'react-icons/go';
 import { ShopContext } from '../context/ShopContext';
-
+import Login from '../pages/Login.jsx';
+import { Link } from 'react-router-dom';
 // Import your data files
 import categories from '../assets/data/Categories.json';
 import products from '../assets/products.js';
@@ -270,18 +271,22 @@ const Navbar = () => {
 
           {/* User Dropdown */}
           <div className="relative">
+           <Link to ='/Login'>
             <button
               onClick={() => setDropdownOpen(!dropdownOpen)}
               className="p-2 rounded-full hover:bg-gray-100 transition"
             >
               <FiUser className="h-6 w-6 text-gray-700" />
-            </button>
+            </button></Link>
             {dropdownOpen && (
-              <div className="absolute right-0 top-12 w-36 py-3 px-5 bg-slate-100 text-gray-500 rounded shadow-lg z-50">
+           
+           
+           <div className="absolute right-0 top-12 w-36 py-3 px-5 bg-slate-100 text-gray-500 rounded shadow-lg z-50">
                 <NavLink to="/profile" className="block cursor-pointer hover:text-black">My Profile</NavLink>
                 <NavLink to="/orders" className="block cursor-pointer hover:text-black">Orders</NavLink>
                 <button className="block cursor-pointer hover:text-black w-full text-left">Logout</button>
               </div>
+              
             )}
           </div>
 
